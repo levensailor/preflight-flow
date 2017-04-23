@@ -1,0 +1,165 @@
+<template name="test">
+<div class="col-md-6">
+  <div class="panel panel-primary">
+  <div class="panel-heading">
+    Presidio Networked Solutions Test Plan  -&nbsp;{{thisProject.project}}TP
+  </div>
+
+  <div class="panel-body">
+  {{thisProject.engineerName}} <span class="badge">{{thisProject.engineerTitle}}</span>
+  <br>
+  {{thisProject.engineerEmail}}
+  <br>
+  {{thisProject.createdAt}}
+</div>
+</div>
+<br>
+<div class="progress">
+  <div class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar" aria-valuenow=90 aria-valuemin="20" aria-valuemax="100" style="width: {{progress}};">
+    {{progress}}
+  </div>
+</div>
+</div>
+<div class="col-md-6">
+  <div class="panel panel-default top-right">
+    <div class="panel-heading">{{thisProject.companyName}}</div>
+  <ul class="list-group">
+  <li class="list-group-item"><span class="badge">Project Manager</span> {{thisProject.projectManagerName}}, {{thisProject.projectManagerEmail}}</li>
+  <li class="list-group-item"><span class="badge">Customer</span>{{thisProject.customerName}}, {{thisProject.customerEmail}}</li>
+</ul>
+</div>
+
+<div class="button-pdf">
+  {{#if isIncomplete}}
+  <button type="button" class="btn btn-default mark-complete">Mark Complete</button>
+    {{else}}
+    <button type="button" class="btn btn-default mark-incomplete">Mark Incomplete</button>
+    {{/if}}
+{{#if isComplete}}
+{{#if pdfNotGenerated}}
+<button class="btn btn-default create-pdf" type="submit">Generate PDF</button>
+{{else}}
+<div class="btn-group">
+  <button type="button" class="btn btn-default download-pdf">Download PDF</button>
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#">..and Email to Team</a></li>
+    <li><a href="#">..and Send Results to Spark</a></li>
+    <li><a href="#">..and Archive to iConnect</a></li>
+
+  </ul>
+</div>
+{{/if}}
+{{/if}}
+<button class="btn btn-default test-add" value="{{this}}" type="submit"><i class="fa fa-plus assign-test" aria-hidden="true"></i></button>
+
+{{#each assignedUser}}
+{{#if hasAvatar this}}
+  <a href="#"><img class="test-avatar show-user" title="{{thisName this}}" src="{{thisAvatar this}}"/></a>
+  {{else}}
+  <a href="#"><div class="test-initials show-user" title="{{thisName this}}">{{thisInitials this}}</div></a>
+  {{/if}}
+  {{/each}}
+
+
+</div>
+</div>
+
+
+
+<div class="row full-width">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Instructions</th>
+            <th>Expected Results</th>
+            <th>Results</th>
+            <th>Comments</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {{#each theseQuestions}}
+            {{#each test}}
+            <tr class="test-row" id="a" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Click To Edit">
+              <td>{{description}}</td>
+              <td>{{instructions}}</td>
+              <td>{{expected}}</td>
+              <td>
+                <div class="radioset">
+                  {{#if isIncomplete}}
+                <div><input class="pass" type="radio" name="result {{@index}}" checked="{{pass}}" value="true"><label class="pass">pass</label></div>
+                <div><input class="fail" type="radio" name="result {{@index}}" checked="{{fail}}" value="false"><label class="fail">fail</label></div>
+                {{else}}
+                <div><input class="pass" type="radio" name="result {{@index}}" checked="{{pass}}" value="true" disabled><label class="pass">pass</label></div>
+                <div><input class="fail" type="radio" name="result {{@index}}" checked="{{fail}}" value="false" disabled><label class="fail">fail</label></div>
+                {{/if}}
+            </div>
+              </td>
+            <td><i class="fa fa-comment-o fa-2x add-comment"></i></td>
+            </tr>
+            {{/each}}
+          {{/each}}
+        </tbody>
+      </table>
+  </div>
+
+  <div class="row full-width">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Test Discrepancies</th>
+            </tr>
+          </thead>
+          <tr>
+  {{#each theseQuestions}}
+  <textarea class="form-control test-comments" id="comments" placeholder="Comments" value="{{comments}}"></textarea>{{/each}}
+</tr>
+</table>
+</div>
+
+{{#if isComplete}}
+  <div class="row">
+  <div class="col-md-6">
+    <div id="1-signature-pad" class="m-signature-pad">
+      <div class="m-signature-pad--body">
+        <canvas width="550" height="100" style="border: 1px solid #000000" class="signature"></canvas>
+      </div>
+      <div class="m-signature-pad--footer">
+        <div class="row">
+          <div class="col-md-8">
+        <div class="description">Engineer Signature</div>
+      </div>
+        <div class="col-md-4 sig-buttons">
+        <button class="button-clear" data-action="clear1">Clear</button>
+        <button class="button-save" data-action="save1">Save</button>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div id="2-signature-pad" class="m-signature-pad">
+      <div class="m-signature-pad--body">
+        <canvas width="550" height="100" style="border: 1px solid #000000" class="signature"></canvas>
+      </div>
+      <div class="m-signature-pad--footer">
+        <div class="row">
+          <div class="col-md-8">
+        <div class="description">Customer Signature</div></div>
+        <div class="col-md-4 sig-buttons">
+        <button class="button-clear" data-action="clear2">Clear</button>
+        <button class="button-save" data-action="save2">Save</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{{/if}}
+</template>

@@ -1,0 +1,17 @@
+<template name="modal">
+<div class="col-md-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+    <h4>Select Test</h4>
+    </div>
+    <div class="panel-body">
+      {{#autoForm id="afTests" type=formType collection=Templates doc=selectedTestDoc autosave=autoSaveMode}}
+        {{> afQuickField name="description"}}
+        {{> afQuickField name="instructions"}}
+        {{> afQuickField name="expected"}}
+      {{/autoForm}}
+      <button type=button id="{{this._id}}" class="btn btn-danger delete">Delete</button>
+    </div>
+  </div>
+</div>
+</template>

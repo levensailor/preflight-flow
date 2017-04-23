@@ -1,0 +1,58 @@
+<template name="archive">
+{{#if Template.subscriptionsReady}}
+{{#if isAdminOrDirector}}
+{{#each testPlan}}
+  <br>
+  <div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{this.createdAt}} - {{this.project}}TP - {{this.companyName}}</h3>
+    <button class="btn btn-default archive-adduser" value="{{this}}" type="submit"><i class="fa fa-plus assign-test" aria-hidden="true"></i></button>
+    {{#each assignedUser}}
+    {{#if hasAvatar this}}
+      <a href="#"><img class="archive-avatar show-user" id="show-user" value="{{this}}" title="{{thisName this}}" src="{{thisAvatar this}}"/></a>
+      {{else}}
+      <a href="#"><div class="archive-initials show-user" id="show-user" value="{{this}}" title="{{thisName this}}">{{thisInitials this}}</div></a>
+      {{/if}}
+      {{/each}}
+  </div>
+  <div class="panel-body">
+    {{{this.technologyLabel}}} {{this.technology}}: {{this.sections}} {{#if this.status}}<span class="badge">{{this.status}}</span>{{else}}<span class="badge">New</span>{{/if}}
+    <div class="button-right">
+      {{#if pdfExists}}<button class="btn btn-default download-pdf" type="submit">Download PDF</button>{{/if}}
+      <button class="btn btn-default manage" type="submit">Manage Test</button>
+      <button class="btn btn-default delete" type="submit">Delete</button>
+    </div>
+  </div>
+  </div>
+  {{/each}}
+  {{else}}
+  {{#each assignedOrManagerSubset}}
+    <br>
+    <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{this.createdAt}} - {{this.project}}TP - {{this.companyName}}</h3>
+      <button class="btn btn-default archive-adduser" value="{{this}}" type="submit"><i class="fa fa-plus assign-test" aria-hidden="true"></i></button>
+      {{#each assignedUser}}
+      {{#if hasAvatar this}}
+        <a href="#"><img class="archive-avatar show-user" id="show-user" value="{{this}}" title="{{thisName this}}" src="{{thisAvatar this}}"/></a>
+        {{else}}
+        <a href="#"><div class="archive-initials show-user" id="show-user" value="{{this}}" title="{{thisName this}}">{{thisInitials this}}</div></a>
+        {{/if}}
+        {{/each}}
+    </div>
+    <div class="panel-body">
+      {{{this.technologyLabel}}} {{this.technology}}: {{this.sections}} {{#if this.status}}<span class="badge">{{this.status}}</span>{{else}}<span class="badge">New</span>{{/if}}
+      <div class="button-right">
+        {{#if pdfExists}}<button class="btn btn-default download-pdf" type="submit">Download PDF</button>{{/if}}
+        <button class="btn btn-default manage" type="submit">Manage Test</button>
+        <button class="btn btn-default delete" type="submit">Delete</button>
+      </div>
+    </div>
+    </div>
+    {{/each}}
+  {{/if}}
+{{else}}
+<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+<span class="sr-only">Loading...</span>
+  {{/if}}
+</template>

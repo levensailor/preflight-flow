@@ -1,0 +1,3 @@
+section,title,description,instructions,expected
+CUCM Base,CUCM,CallManager service verification,Test: Log into all CUCM servers.  Verify services are running as defined in the UC Roles table of the Design document. ,Services are running as designated in the UC Roles table of the Design Document
+CUCM Feature Verification,CUCM,Ad-hoc Conference,"Test: Note phone numbers in testing notes  From an IP Phone, conference up to eight parties together using the Conference key on the phone.  ",Conference call should succeed.  

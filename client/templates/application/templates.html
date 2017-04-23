@@ -1,0 +1,37 @@
+<template name="templates">
+    {{#if sections}}
+    <div class="page-header full-width">
+    <h1><small> {{{whichTechnology}}} : {{whichSection}} {{> BootstrapToggle options=toggle_A_options var="global"}}</small></h1>
+  </div>
+    <div class="row full-width">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Instructions</th>
+                <th>Expected Results</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each section}}
+                <tr class="test-row" id="a" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Click To Edit">
+                  <td>{{> editableText textarea="true" class="test" inputClass="test-input" collection="Templates" field="description"}}</td>
+                  <td>{{> editableText textarea="true" class="test" inputClass="test-input" collection="Templates" field="instructions"}}</td>
+                  <td>{{> editableText textarea="true" class="test" inputClass="test-input" collection="Templates" field="expected"}}</td>
+                  <td><button class="btn btn-danger del-test" id="{{this._id}}">
+                    <i class="fa fa-minus"></i></button></td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+      </div>
+
+        <button class="btn btn-primary button-space add-test" id="{{this._id}}">
+          <i class="fa fa-plus"></i>&nbsp;Add Questions</button>
+
+        <button class="btn btn-danger button-space del-template" id="{{this._id}}">
+          <i class="fa fa-minus"></i>&nbsp;Delete Template</button>
+
+
+{{/if}}
+</template>

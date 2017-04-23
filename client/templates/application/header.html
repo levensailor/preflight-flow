@@ -1,0 +1,182 @@
+<template name="layout">
+  <nav class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{{pathFor '/'}}"><i class="fa fa-space-shuttle"></i> Preflight Check</a>
+    </div>
+
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a tabindex="0" data-toggle="dropdown" data-submenu id="help-template">
+            UC<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" >
+            <li class="template-title">Templates:</li>
+              {{#each theseUCTemplates}}
+              <li><a tabindex="0" href="/templates" class="template-menu">{{this.section}}</a></li>
+              {{/each}}
+
+            <li role="separator" class="divider"></li>
+            <li>
+            <a tabindex="0" class="add-uc-template"><i class="fa fa-plus"></i> New Template</a>
+            </li>
+            <li>
+              <input tabindex="0" type="file" name="uploadCSV" id="file" class="inputfile" />
+              <label tabindex="0" for="file"><i class="fa fa-upload"></i> Upload CSV</label>
+            </li>
+
+            <li><a tabindex="0" href="http://cdpneighbors.com/wp-content/uploads/2017/02/pf_example.csv"><i class="fa fa-file-excel-o"></i> Download Format</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a tabindex="0" data-toggle="dropdown" data-submenu>
+            DC<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="template-title">Templates:</li>
+              {{#each theseDCTemplates}}
+              <li><a tabindex="0" href="/templates" class="template-menu">{{this.section}}</a></li>
+              {{/each}}
+
+            <li role="separator" class="divider"></li>
+            <li>
+            <a tabindex="0" class="add-dc-template"><i class="fa fa-plus"></i> New Template</a>
+            </li>
+            <li>
+              <input tabindex="0" type="file" name="uploadCSV" id="file" class="inputfile" />
+              <label tabindex="0" for="file"><i class="fa fa-upload"></i> Upload CSV</label>
+            </li>
+
+            <li><a tabindex="0" href="http://cdpneighbors.com/wp-content/uploads/2017/02/pf_example.csv"><i class="fa fa-file-excel-o"></i> Download Format</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a tabindex="0" data-toggle="dropdown" data-submenu>
+            Core<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="template-title">Templates:</li>
+              {{#each theseCoreTemplates}}
+              <li><a tabindex="0" href="/templates" class="template-menu">{{this.section}}</a></li>
+              {{/each}}
+
+            <li role="separator" class="divider"></li>
+            <li>
+            <a tabindex="0" class="add-core-template"><i class="fa fa-plus"></i> New Template</a>
+            </li>
+            <li>
+              <input tabindex="0" type="file" name="uploadCSV" id="file" class="inputfile" />
+              <label tabindex="0" for="file"><i class="fa fa-upload"></i> Upload CSV</label>
+            </li>
+
+            <li><a tabindex="0" href="http://cdpneighbors.com/wp-content/uploads/2017/02/pf_example.csv"><i class="fa fa-file-excel-o"></i> Download Format</a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a tabindex="0" data-toggle="dropdown" data-submenu>
+            Mobility<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="template-title">Templates:</li>
+              {{#each theseMobilityTemplates}}
+              <li><a tabindex="0" href="/templates" class="template-menu">{{this.section}}</a></li>
+              {{/each}}
+
+            <li role="separator" class="divider"></li>
+            <li>
+            <a tabindex="0" class="add-mobility-template"><i class="fa fa-plus"></i> New Template</a>
+            </li>
+            <li>
+              <input tabindex="0" type="file" name="uploadCSV" id="file" class="inputfile" />
+              <label tabindex="0" for="file"><i class="fa fa-upload"></i> Upload CSV</label>
+            </li>
+
+            <li><a tabindex="0" href="http://cdpneighbors.com/wp-content/uploads/2017/02/pf_example.csv"><i class="fa fa-file-excel-o"></i> Download Format</a>
+            </li>
+          </ul>
+        </li>
+
+
+        <li class="dropdown">
+          <a tabindex="0" data-toggle="dropdown" data-submenu>
+            Security<span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="template-title">Templates:</li>
+              {{#each theseSecurityTemplates}}
+              <li><a tabindex="0" href="/templates" class="template-menu">{{this.section}}</a></li>
+              {{/each}}
+
+            <li role="separator" class="divider"></li>
+            <li>
+            <a tabindex="0" class="add-security-template"><i class="fa fa-plus"></i> New Template</a>
+            </li>
+            <li>
+              <input tabindex="0" type="file" name="uploadCSV" id="file" class="inputfile" />
+              <label tabindex="0" for="file"><i class="fa fa-upload"></i> Upload CSV</label>
+            </li>
+
+            <li><a tabindex="0" href="http://cdpneighbors.com/wp-content/uploads/2017/02/pf_example.csv"><i class="fa fa-file-excel-o"></i> Download Format</a>
+            </li>
+          </ul>
+        </li>
+
+
+
+
+      </ul>
+
+
+    {{#if currentUser}}
+    <ul class="nav navbar-nav navbar-right">
+      {{#if isAdmin}}
+      <li><a href="/admin"><i class="fa fa-cogs"></i> Admin</a></li>{{/if}}
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          {{#if hasAvatar}}
+          <img class="header-avatar" src="{{thisAvatar}}"/>
+          {{else}}
+          <div class="initials">{{thisInitials}}</div>
+          {{/if}}
+          {{thisUser}}
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+          </ul>
+      </li>
+    </ul>
+    {{/if}}
+
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <li><a href="/archive" id="manage-test">Test Plans</a></li>
+        <li><a href="/test" id="new-test">New Test</a></li>
+      </li>
+    </ul>
+
+    </div>
+  </nav>
+
+  <div class="container">
+    <div id="main">
+      <main>
+        {{>Template.dynamic template=content}}
+      </main>
+    </div>
+  </div>
+  <div class="makewish">
+  <i class="fa fa-magic"></i> Make a Wish!
+  </div>
+</template>
