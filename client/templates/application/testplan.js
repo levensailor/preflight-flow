@@ -158,8 +158,9 @@ Template.testplan.events({
           instructions : thisSection[j].instructions,
           expected : thisSection[j].expected,
           section : thisSection[j].section,
+          id: thisTest+j
       }
-      TestPlans.update({_id: thisTest}, {$push:  {test : { description :  objOfData.description , instructions :  objOfData.instructions , expected : objOfData.expected , section : objOfData.section , actual : "" , passfail : false , comments : "....." }}})
+      TestPlans.update({_id: thisTest}, {$push:  {test : { description :  objOfData.description , id : objOfData.id , instructions :  objOfData.instructions , expected : objOfData.expected , section : objOfData.section , actual : "" , passfail : false , comments : "....." }}})
     }//for
     }//for
     FlowRouter.go('/test/'+projectCode.value);
