@@ -100,7 +100,11 @@
                 {{/if}}
             </div>
               </td>
+              {{#if hasComment}}
+            <td><i class="fa fa-commenting-o fa-2x add-comment"></i></td>
+              {{else}}
             <td><i class="fa fa-comment-o fa-2x add-comment"></i></td>
+              {{/if}}
             </tr>
             {{/each}}
           {{/each}}

@@ -126,6 +126,8 @@ Template.test.events({
   console.log("clicked pass");
   var testId = TestPlans.findOne({"project": projectId})._id;
   var expected = this.expected;
+//change to id now.. would mess up any tests current but fix need to have
+//unique expected results for each question.. change in TestPlans.js also
   Meteor.call(
     'answerPass', testId, expected, ( error, response ) => {
     if ( error ) {
@@ -394,7 +396,10 @@ Template.test.helpers({
     return !Session.get("selectedTestId");
   },
   hasComment: function () {
-    
+    if (this.comments !== '.....'){
+      return true;
+    }
+    else {return false};
   },
 });
 
@@ -406,11 +411,20 @@ Template.test.events({
     Templates.remove({_id: Session.get("selectedTestId")});
   },
   'click .add-comment': function () {
+    var projectCode = Session.get("projectCode");
+    var projectId = TestPlans.findOne({project: projectCode})._id;
+    var testId = this.id;
     bootbox.prompt({
         title: "This is a prompt with a textarea!",
         inputType: 'textarea',
         callback: function (result) {
-            console.log(result);
+          if (typeof testId !== 'undefined' && typeof result !== 'undefined' && typeof projectId !== 'undefined'){
+          Meteor.call( 'addComments', projectId, testId, result, (error, response) => {
+            if (error){
+              console.log(error);
+            }else{}
+          });
+        }
         }
     });
   },
